@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
     [Header("Pause Menu")]
     public GameObject pauseMenu;
     [SerializeField] bool paused = false;
+    public CameraManager cameraManager;
     private void Start() {
         DontDestroyOnLoad(gameObject);
     }
@@ -33,6 +34,9 @@ public class EventManager : MonoBehaviour
     private void Update()
     {
         TogglePause();
+        if(!paused && pauseMenu.activeInHierarchy == false) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
+        if(!paused && pauseMenu.activeInHierarchy == true) paused = true;
+        if (paused) Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
     }
 
     void TogglePause()
