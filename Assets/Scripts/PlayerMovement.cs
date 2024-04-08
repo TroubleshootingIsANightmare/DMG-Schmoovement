@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     Vector3 inputDirection;
 
+
+
     [Header("Particles")]
     public ParticleSystem speedParticles;
 
@@ -50,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.velocity.y);
         //Check grounded
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight*0.5f + 0.35f, ground);
         SpeedParticles();
@@ -77,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
+
             if (!sliding)
             {
                 multiplier = 1f;
@@ -193,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         float threshold = 30f;
 
         //Detect if angle is less than threshold
-        if (angle <= threshold && Input.GetAxisRaw("Vertical") > 0 && grounded || !grounded && angle <= threshold) emit.rateOverTime = rb.velocity.magnitude;
+        if (angle <= threshold && Input.GetAxisRaw("Vertical") > 0) emit.rateOverTime = rb.velocity.magnitude;
         else emit.rateOverTime = 0;
     }
 
@@ -204,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(jumpKey) && canJump && grounded)
         {
             canJump = false;
+
             Jump();
             Invoke("ResetJump", jumpCooldown);
         }

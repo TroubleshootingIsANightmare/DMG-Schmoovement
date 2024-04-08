@@ -11,6 +11,7 @@ public class CameraManager : MonoBehaviour
     public Transform playerCam;
     public Transform camPos;
     public Transform playerPos;
+    public Camera cam;
     public float yRotation;
     public float xRotation;
     public static CameraManager instance;
@@ -36,8 +37,11 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         SetPosition();
     }
+
+
 
     public void SetPosition()
     {
