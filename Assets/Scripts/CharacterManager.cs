@@ -8,10 +8,12 @@ public class CharacterManager : MonoBehaviour
 {
     public static CharacterManager instance;
     public PlayerMovement moveScript;
+
     void Start()
     {
         moveScript = GetComponent<PlayerMovement>();
         DontDestroyOnLoad(gameObject);
+
     }
 
     private void Awake()

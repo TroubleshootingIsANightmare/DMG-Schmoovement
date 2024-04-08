@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     public float playerHeight = 1.4f;
     public Transform player;
-    private Transform core;
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -46,19 +45,16 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         canJump = true;
-        //Get player transform
-        player = GetComponent<Transform>();
-        //Get core
-        core = GameObject.Find("Player/Core").GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rb.velocity.y);
         //Check grounded
-        grounded = Physics.Raycast(core.position, Vector3.down, playerHeight*0.5f + 0.15f, ground);
-
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight*0.5f + 0.35f, ground);
         SpeedParticles();
+        
     }
 
     private void FixedUpdate()
@@ -73,14 +69,11 @@ public class PlayerMovement : MonoBehaviour
         float xMag = mag.x, yMag = mag.y;
         CounterMovement(horizontalInput, verticalInput, mag);
         moveDirection = vMult * orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        rb.AddForce(Vector3.down * Time.deltaTime * 10);
-
         if (horizontalInput > 0 && xMag > maxSpeed) horizontalInput = 0;
         if (horizontalInput < 0 && xMag < -maxSpeed) horizontalInput = 0;
         if (verticalInput > 0 && yMag > maxSpeed) verticalInput = 0;
         if (verticalInput < 0 && yMag < -maxSpeed) verticalInput = 0;
-
+        rb.AddForce(Vector3.down * Time.deltaTime * 10f);
 
         if (grounded)
         {
@@ -91,12 +84,12 @@ public class PlayerMovement : MonoBehaviour
             }
             if(sliding)
             {
-                playerHeight = 0.9f;
+                playerHeight = 0.7f;
                 vMult = 0;
                 multiplier = 0f;
                 if(canJump)
                 {
-                    rb.AddForce(Vector3.down * Time.fixedDeltaTime * 100);
+                    rb.AddForce(Vector3.down * Time.fixedDeltaTime * 3000f);
                 }
             }
         }
@@ -107,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
             vMult = 0.5f;
         }
 
-        rb.AddForce(orientation.right * horizontalInput * speed * multiplier * Time.deltaTime);
+        rb.AddForce(orientation.right * horizontalInput * speed * multiplier * 0.5f * Time.deltaTime);
         rb.AddForce(vMult * orientation.forward * verticalInput * speed * 0.5f * Time.deltaTime);
     }
 
@@ -215,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke("ResetJump", jumpCooldown);
         }
 
-        if (Input.GetKeyDown(slideKey) && !sliding && canSlide && (verticalInput != 0 || horizontalInput != 0))
+        if (Input.GetKey(slideKey) && !sliding && canSlide && (verticalInput != 0 || horizontalInput != 0))
         {
 
             sliding = true;
@@ -225,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         if (!Input.GetKey(slideKey)) sliding = false;
 
         if (sliding) Slide(); player.localScale = slideScale; transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        if (!sliding) player.localScale = playerScale; playerHeight = 1.8f; transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        if (!sliding) player.localScale = playerScale; playerHeight = 1.4f; transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
     public void SetPosition(Transform newPos)
