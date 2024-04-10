@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
+using UnityEditor;
 using UnityEngine;
+using Unity.Mathematics;
 
 public class RotateBody : MonoBehaviour
 {
-    public Transform body, head, target, bodyTarget;
+    public Transform head, target;
     public CameraManager cameraManager;
+
     void LateUpdate()
     {
         GetMiddle();
@@ -31,7 +33,7 @@ public class RotateBody : MonoBehaviour
             targetPoint = ray.origin + (ray.direction * 75f);
             target.position = targetPoint;
         }
-
-
     }
+
+
 }
