@@ -7,12 +7,13 @@ using Unity.Mathematics;
 
 public class RotateBody : MonoBehaviour
 {
-    public Transform head, target;
+    public Transform head, target, body;
     public CameraManager cameraManager;
 
     void LateUpdate()
     {
         GetMiddle();
+        RotBody();
         head.LookAt(target);
     }
 
@@ -35,5 +36,10 @@ public class RotateBody : MonoBehaviour
         }
     }
 
-
+    void RotBody()
+    {
+        var lookPos = target.position - body.position; 
+        lookPos.z = 0; var rotation = Quaternion.LookRotation(lookPos); 
+        body.rotation = Quaternion.Slerp(body.rotation, rotation, 0.1f);
+    }
 }

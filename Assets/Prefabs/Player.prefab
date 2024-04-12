@@ -787,6 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 2138744976468139335}
   target: {fileID: 684746624596171685}
+  body: {fileID: 0}
   cameraManager: {fileID: 0}
 --- !u!1 &1824604630699292096
 GameObject:
