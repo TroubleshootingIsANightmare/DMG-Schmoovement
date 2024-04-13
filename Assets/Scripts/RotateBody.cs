@@ -7,14 +7,13 @@ using Unity.Mathematics;
 
 public class RotateBody : MonoBehaviour
 {
-    public Transform head, target, body;
+    public Transform target, body;
     public CameraManager cameraManager;
 
     void LateUpdate()
     {
         GetMiddle();
         RotBody();
-        head.LookAt(target);
     }
 
 
@@ -38,8 +37,19 @@ public class RotateBody : MonoBehaviour
 
     void RotBody()
     {
-        var lookPos = target.position - body.position; 
-        lookPos.z = 0; var rotation = Quaternion.LookRotation(lookPos); 
-        body.rotation = Quaternion.Slerp(body.rotation, rotation, 0.1f);
+        // Get the direction from this object to the target
+        Vector3 direction = target.position - body.position;
+
+        // Since the body has a -180x rotation, adjust the forward direction accordingly
+        Vector3 adjustedDirection = Quaternion.Euler(0, 0, -11) * direction;
+
+        // Project the direction onto the Y plane (ignore horizontal movement)
+        adjustedDirection.x = 0; adjustedDirection.z = 0;
+
+        // Get the rotation that looks along the direction
+        Quaternion rotation = Quaternion.LookRotation(adjustedDirection);
+
+        // Apply the rotation to the body's transform
+        body.localRotation = Quaternion.Euler(-180, 0, -adjustedDirection.y);
     }
 }
