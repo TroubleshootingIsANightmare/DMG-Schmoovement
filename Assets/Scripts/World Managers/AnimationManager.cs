@@ -6,6 +6,7 @@ public class AnimationManager : MonoBehaviour
 {
     public Animator playerAnimator;
     public PlayerMovement playerMovement;
+    public LaunchProjectile projScript;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,6 @@ public class AnimationManager : MonoBehaviour
         playerAnimator.SetFloat("PosY", Input.GetAxisRaw("Vertical"));
         playerAnimator.SetFloat("VelY", playerMovement.rb.velocity.y);
         playerAnimator.SetBool("Grounded", playerMovement.grounded);
-        playerAnimator.SetBool("Shooting", Input.GetMouseButtonDown(0));
+        playerAnimator.SetBool("Shooting", projScript.shooting);
     }
 }

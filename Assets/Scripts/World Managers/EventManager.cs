@@ -8,8 +8,9 @@ public class EventManager : MonoBehaviour
     public static EventManager instance;
     [Header("Pause Menu")]
     public GameObject pauseMenu;
-    [SerializeField] bool paused = false;
+    public bool paused = false;
     public CameraManager cameraManager;
+
     private void Start() {
         DontDestroyOnLoad(gameObject);
     }
@@ -33,6 +34,7 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
+        Time.timeScale = paused ? 0 : 1;
         TogglePause();
         if(!paused && pauseMenu.activeInHierarchy == false) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
         if(!paused && pauseMenu.activeInHierarchy == true) paused = true;
@@ -54,5 +56,11 @@ public class EventManager : MonoBehaviour
             }
         } 
         if(SceneManager.GetActiveScene().buildIndex == 0) pauseMenu.SetActive(false); paused = false;
+    }
+
+
+    void CloseGame()
+    {
+        Application.Quit();
     }
 }
