@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class EventManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class EventManager : MonoBehaviour
     public GameObject pauseMenu;
     public bool paused = false;
     public CameraManager cameraManager;
+
 
     private void Start() {
         DontDestroyOnLoad(gameObject);
@@ -59,8 +61,10 @@ public class EventManager : MonoBehaviour
     }
 
 
-    void CloseGame()
+    public void CloseGame()
     {
         Application.Quit();
     }
+
+
 }
