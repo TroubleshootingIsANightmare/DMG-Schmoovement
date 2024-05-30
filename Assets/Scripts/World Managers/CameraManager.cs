@@ -41,14 +41,15 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         SetPosition();
-            options = FindObjectOfType<OptionsManager>();
+        options = FindObjectOfType<OptionsManager>();
 
-            if (options != null)
-            {
-                sensX = options.GetSensX();
-                sensY = options.GetSensY();
-            }
-    
+        if (options != null)
+           {
+              sensX = options.GetSensX();
+              sensY = options.GetSensY();
+           }
+        if (SceneManager.GetActiveScene().buildIndex == 0) { yRotation = 0f; xRotation = 0f; }
+
     }
 
 

@@ -15,6 +15,7 @@ public class EventManager : MonoBehaviour
 
     private void Start() {
         DontDestroyOnLoad(gameObject);
+        
     }
 
     private void Awake()
@@ -38,7 +39,8 @@ public class EventManager : MonoBehaviour
     {
         Time.timeScale = paused ? 0 : 1;
         TogglePause();
-        if(!paused && pauseMenu.activeInHierarchy == false) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
+        
+        if(!paused && pauseMenu.activeInHierarchy == false && SceneManager.GetActiveScene().buildIndex != 0) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
         if(!paused && pauseMenu.activeInHierarchy == true) paused = true;
         if (paused) Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
     }
@@ -66,5 +68,9 @@ public class EventManager : MonoBehaviour
         Application.Quit();
     }
 
+    void SetSpawn()
+    {
+
+    }
 
 }

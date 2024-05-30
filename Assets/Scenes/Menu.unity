@@ -2649,21 +2649,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Middle mouse button -> Grapple
 
-    R -> Reload
-
     Space -> Jump
 
-    Left
-    Shift -> Slide
+    Left Shift -> Slide
 
-    Left click -> Shoot
+    Left
+    click -> Shoot
 
     1 -> Rocket Launcher
 
-    2 -> Shotgun
-
-    Escape
-    -> Pause'
+    Escape -> Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5829,9 +5824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensX: 200
-  xSlider: {fileID: 361946268}
   sensY: 200
-  ySlider: {fileID: 1915539585}
   orientation: {fileID: 652890418}
   playerCam: {fileID: 963194228}
   camPos: {fileID: 652890419}

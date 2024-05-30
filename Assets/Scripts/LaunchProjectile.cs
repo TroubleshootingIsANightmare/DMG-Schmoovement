@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LaunchProjectile : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class LaunchProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!eventManager.paused) CheckShooting(); ShakeCamera();
+        if(!eventManager.paused && SceneManager.GetActiveScene().buildIndex != 0) CheckShooting(); ShakeCamera(); shootPosition.gameObject.SetActive(canShoot);
     }
 
     void CheckShooting()

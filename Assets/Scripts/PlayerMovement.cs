@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Particles")]
     public ParticleSystem speedParticles;
 
+    [Header("Spawn Boolean")]
+    public bool spawned = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         canJump = true;
+
+        
     }
 
     // Update is called once per frame
@@ -55,7 +60,11 @@ public class PlayerMovement : MonoBehaviour
         //Check grounded
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight*0.5f + 0.35f, ground);
         SpeedParticles();
-        
+
+        //Check for spawn
+        if (SceneManager.GetActiveScene().buildIndex != 0 && !spawned) SetPosition();
+        if (SceneManager.GetActiveScene().buildIndex == 0) spawned = false;
+
     }
 
     private void FixedUpdate()
@@ -224,9 +233,10 @@ public class PlayerMovement : MonoBehaviour
         if (!sliding) player.localScale = playerScale; playerHeight = 1.4f; transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
-    public void SetPosition(Transform newPos)
+    public void SetPosition()
     {
-        newPos = GameObject.Find("Spawn").GetComponent<Transform>();
-        player.position = newPos.position;
+        spawned = true;
+        Transform newPos = GameObject.Find("Spawn").GetComponent<Transform>();
+        gameObject.transform.position = newPos.position;
     }
 }
