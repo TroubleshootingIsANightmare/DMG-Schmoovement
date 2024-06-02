@@ -115,6 +115,10 @@ MonoBehaviour:
   knockback: 400
   radius: 5
   explosiveFX: {fileID: 1891162804492768070, guid: 853cbdec613d5f849944db50d5ef9639, type: 3}
+  enemy: {fileID: 0}
+  canExplode:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &9059742456767687296
 GameObject:
   m_ObjectHideFlags: 0
