@@ -118,7 +118,8 @@ MonoBehaviour:
   enemy: {fileID: 0}
   canExplode:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
+  exploded: 0
 --- !u!1 &9059742456767687296
 GameObject:
   m_ObjectHideFlags: 0

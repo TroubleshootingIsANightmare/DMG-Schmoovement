@@ -44,7 +44,7 @@ public class LaunchProjectile : MonoBehaviour
 
     void CheckShooting()
     {
-        if(Input.GetMouseButtonDown(0) && canShoot)
+        if(Input.GetMouseButtonDown(0) && canShoot && !eventManager.died)
         {
             shooting = true;
         } else

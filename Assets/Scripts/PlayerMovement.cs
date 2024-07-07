@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight = 1.4f;
     public Transform player;
 
+    public static PlayerMovement instance;
+
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode slideKey = KeyCode.LeftShift;
@@ -37,11 +39,26 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     [Header("Particles")]
     public ParticleSystem speedParticles;
 
     [Header("Spawn Boolean")]
     public bool spawned = false;
+
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -49,9 +66,7 @@ public class PlayerMovement : MonoBehaviour
         //Grab the rigidbody from the player
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        canJump = true;
-
-        
+        canJump = true;        
     }
 
     // Update is called once per frame
@@ -67,10 +82,18 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void SetSpawned(bool spawn)
+    {
+        spawned = spawn;
+    }
+
     private void FixedUpdate()
     {
         Move();
         MyInput();
+        //Check for spawn
+        if (SceneManager.GetActiveScene().buildIndex != 0 && !spawned) SetPosition();
+        if (SceneManager.GetActiveScene().buildIndex == 0) spawned = false;
     }
 
     void Move()
@@ -152,7 +175,6 @@ public class PlayerMovement : MonoBehaviour
     void Slide()
     {
         if(grounded) rb.AddForce(inputDirection.normalized * slideForce);
-        if (rb.velocity.magnitude <= 0.1f) sliding = false;
     }
 
     private void CounterMovement(float x, float y, Vector2 mag)
@@ -238,5 +260,6 @@ public class PlayerMovement : MonoBehaviour
         spawned = true;
         Transform newPos = GameObject.Find("Spawn").GetComponent<Transform>();
         gameObject.transform.position = newPos.position;
+        rb.velocity = Vector3.zero;
     }
 }

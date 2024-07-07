@@ -12,9 +12,25 @@ public class Enemy : MonoBehaviour
     public Collider[] ragdollColliders;
     public Rigidbody[] ragdollRigidbodies;
 
-    public Transform target, body;
+    public Transform target, body, shootPoint;
 
     public bool ragdolled = false;
+
+    public LayerMask whatIsGround, whatIsPlayer;
+
+    //Patroling
+    public Vector3 walkPoint;
+    bool walkPointSet = false;
+    public float walkPointRange;
+
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public GameObject projectile;
+
+    //States
+    public float sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +46,75 @@ public class Enemy : MonoBehaviour
     {
         agent.enabled = !ragdolled;
         if (!ragdolled) { DisableNav();  }
+
+        //Check for sight and attack range
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        if (!ragdolled)
+        {
+            if (!playerInSightRange && !playerInAttackRange) Patroling();
+            if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+            if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        }
+        
+    }
+
+
+    private void Patroling()
+    {
+        if (!walkPointSet) SearchWalkPoint();
+
+        if (walkPointSet)
+            agent.SetDestination(walkPoint);
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        //Walkpoint reached
+        if (distanceToWalkPoint.magnitude < 20f)
+            walkPointSet = false;
+    }
+    private void SearchWalkPoint()
+    {
+        //Calculate random point in range
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        Debug.Log(agent.destination);
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+            walkPointSet = true;
+        Debug.Log("YEAH!");
+    }
+
+    private void ChasePlayer()
+    {
+        agent.SetDestination(target.position);
+        //Rotate entire object to look at player
+        Vector3 dir = target.position - gameObject.transform.position;
+        dir.y = 0;
+        Quaternion rot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, 3f * Time.deltaTime);
+    }
+
+    private void AttackPlayer()
+    {
+
+
+        if (!alreadyAttacked)
+        {
+            ///Attack code here
+            Rigidbody rb = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Vector3 dir = target.position - shootPoint.position;
+            rb.AddForce(dir.normalized * 32f, ForceMode.Impulse);
+            ///End of attack code
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
     private void LateUpdate()
     {
@@ -40,16 +125,9 @@ public class Enemy : MonoBehaviour
     {
         //Get target and point gun
         target = GameObject.FindGameObjectWithTag("Target").transform;
-        //Set destination so enemy moves to target
-        agent.SetDestination(target.position);
         //Make run when far and not run when close
         animator.SetBool("Running", agent.remainingDistance > agent.stoppingDistance);
-        Debug.Log(animator.GetBool("Running"));
-        //Rotate entire object to look at player
-        Vector3 dir = target.position - gameObject.transform.position;
-        dir.y = 0;
-        Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, 3f * Time.deltaTime);
+        
     }
 
     private void AimBody()

@@ -12,6 +12,11 @@ public class EventManager : MonoBehaviour
     public bool paused = false;
     public CameraManager cameraManager;
 
+    [Header("Death Menu")]
+    public GameObject deathMenu;
+    public bool died = false;
+    
+
 
     private void Start() {
         DontDestroyOnLoad(gameObject);
@@ -33,14 +38,22 @@ public class EventManager : MonoBehaviour
     public void ChangeScene(int i)
     {
         SceneManager.LoadScene(i);
+        died = false;
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        died = false;
     }
 
     private void Update()
     {
-        Time.timeScale = paused ? 0 : 1;
-        TogglePause();
-        
-        if(!paused && pauseMenu.activeInHierarchy == false && SceneManager.GetActiveScene().buildIndex != 0) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
+        CheckDeath();
+        if(!died) TogglePause(); Time.timeScale = paused ? 0 : 1;
+        Time.timeScale = died ? 0 : 1;
+        deathMenu.SetActive(died);
+        if (!paused && pauseMenu.activeInHierarchy == false && SceneManager.GetActiveScene().buildIndex != 0 && !died) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
         if(!paused && pauseMenu.activeInHierarchy == true) paused = true;
         if (paused) Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
     }
@@ -58,10 +71,15 @@ public class EventManager : MonoBehaviour
                 pauseMenu.SetActive(true);
                 paused = true;
             }
-        } 
-        if(SceneManager.GetActiveScene().buildIndex == 0) pauseMenu.SetActive(false); paused = false;
+        }
+       
+        if(SceneManager.GetActiveScene().buildIndex == 0) pauseMenu.SetActive(false); paused = false; 
     }
 
+    void CheckDeath()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0 && died) Time.timeScale = 0; Cursor.lockState = CursorLockMode.None; Cursor.visible = true; Debug.Log("yeah");
+    }
 
     public void CloseGame()
     {

@@ -5,15 +5,9 @@ using UnityEngine;
 public class EnemyAimGun : MonoBehaviour
 {
     public Enemy enemy;
-    public float rotationSpeed = 5f;
-    // Start is called before the first frame update
-    void Start()
-    {
+    public float rotationSpeed = 2f;
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 direction = enemy.target.position - transform.position;
 
