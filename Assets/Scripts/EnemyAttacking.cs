@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AimGun : MonoBehaviour
+public class EnemyAttacking : MonoBehaviour
 {
-    public Transform target;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +13,6 @@ public class AimGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.LookAt(target);   
+        
     }
 }

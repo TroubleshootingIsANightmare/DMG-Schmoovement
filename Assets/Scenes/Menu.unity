@@ -6282,6 +6282,10 @@ PrefabInstance:
       propertyPath: cameraManager
       value: 
       objectReference: {fileID: 2052498691}
+    - target: {fileID: 1538792158854119986, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 7736366971756708102, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
