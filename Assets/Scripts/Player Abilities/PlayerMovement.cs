@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     public float playerHeight = 1.4f;
     public Transform player;
-
+    public CameraManager cameraManager;
     public static PlayerMovement instance;
 
     [Header("Keys")]
@@ -265,5 +265,6 @@ public class PlayerMovement : MonoBehaviour
         Transform newPos = GameObject.Find("Spawn").GetComponent<Transform>();
         gameObject.transform.position = newPos.position;
         rb.velocity = Vector3.zero;
+        cameraManager.ResetRotation();
     }
 }

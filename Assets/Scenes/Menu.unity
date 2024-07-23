@@ -7842,6 +7842,10 @@ PrefabInstance:
       propertyPath: cameraManager
       value: 
       objectReference: {fileID: 2052498691}
+    - target: {fileID: 4630055353354649085, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: cameraManager
+      value: 
+      objectReference: {fileID: 2052498691}
     - target: {fileID: 7363464498331635751, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: Loop
       value: 1
@@ -7894,6 +7898,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8721121312213867566, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: bulletSpeed
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 8721121312213867566, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: eventManager
       value: 

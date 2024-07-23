@@ -48,11 +48,14 @@ public class CameraManager : MonoBehaviour
               sensX = options.GetSensX();
               sensY = options.GetSensY();
            }
-        if (SceneManager.GetActiveScene().buildIndex == 0) { yRotation = 0f; xRotation = 0f; }
+        if (SceneManager.GetActiveScene().buildIndex == 0) { ResetRotation(); }
 
     }
 
-
+    public void ResetRotation()
+    {
+        yRotation = 0f; xRotation = 0f;
+    }
 
     public void SetPosition()
     {
