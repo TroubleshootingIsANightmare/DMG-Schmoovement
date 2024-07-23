@@ -678,7 +678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3710300779133991761, guid: 976f86785f5870e408a56f661ce8d1cc, type: 3}
       propertyPath: m_Acceleration
-      value: 90
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3710300779133991761, guid: 976f86785f5870e408a56f661ce8d1cc, type: 3}
       propertyPath: m_StoppingDistance
@@ -718,11 +718,11 @@ PrefabInstance:
       objectReference: {fileID: 173783877}
     - target: {fileID: 8191331694542061235, guid: 976f86785f5870e408a56f661ce8d1cc, type: 3}
       propertyPath: sightRange
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8191331694542061235, guid: 976f86785f5870e408a56f661ce8d1cc, type: 3}
       propertyPath: attackRange
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8191331694542061235, guid: 976f86785f5870e408a56f661ce8d1cc, type: 3}
       propertyPath: walkPointRange

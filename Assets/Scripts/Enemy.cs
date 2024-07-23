@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
 
+
     //Particle Effects
     public GameObject shootFX;
     // Start is called before the first frame update
@@ -57,7 +58,8 @@ public class Enemy : MonoBehaviour
         {
             if (!playerInSightRange && !playerInAttackRange) Patroling();
             if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-            if (playerInAttackRange && playerInSightRange) AttackPlayer();
+            if (playerInAttackRange && playerInSightRange) AttackPlayer(); agent.SetDestination(target.position);
+            
         }
         
     }
@@ -73,8 +75,9 @@ public class Enemy : MonoBehaviour
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 20f)
+        if (distanceToWalkPoint.magnitude < 10f)
             walkPointSet = false;
+
     }
     private void SearchWalkPoint()
     {
@@ -83,20 +86,17 @@ public class Enemy : MonoBehaviour
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        Debug.Log(agent.destination);
+
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
             walkPointSet = true;
-        Debug.Log("YEAH!");
+
+
+
     }
 
     private void ChasePlayer()
     {
         agent.SetDestination(target.position);
-        //Rotate entire object to look at player
-        Vector3 dir = target.position - gameObject.transform.position;
-        dir.y = 0;
-        Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, 3f * Time.deltaTime);
     }
 
     private void AttackPlayer()
@@ -110,6 +110,8 @@ public class Enemy : MonoBehaviour
             Instantiate(shootFX, shootPoint.position, shootPoint.rotation);
             Vector3 dir = target.position - shootPoint.position;
             rb.AddForce(dir.normalized * 32f, ForceMode.Impulse);
+
+
             ///End of attack code
 
             alreadyAttacked = true;
@@ -144,6 +146,12 @@ public class Enemy : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, Vector3.Distance(new Vector3(target.position.x, 0, target.position.z), new Vector3(body.position.x, 0, body.position.z))) * Mathf.Rad2Deg;
 
         body.localRotation = Quaternion.Euler(-180, 0, -angle);
+
+        //Rotate entire object to look at player
+        Vector3 dir = agent.destination - gameObject.transform.position;
+        dir.y = 0;
+        Quaternion rot = Quaternion.LookRotation(dir);
+        transform.rotation = rot;
 
     }
 

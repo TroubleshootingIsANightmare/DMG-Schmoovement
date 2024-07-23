@@ -14,6 +14,6 @@ public class SliderBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sliderText.text = words + ": " + slider.value;        
+        sliderText.text = words + ": " + slider.value.ToString("F2");        
     }
 }

@@ -7,9 +7,11 @@ public class OptionsManager : MonoBehaviour
 {
     public Slider sensXSlider;
     public Slider sensYSlider;
+    public Slider musicVolSlider;
 
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
+    private const string MusicVolKey = "MusicVol";
 
     public static OptionsManager instance;
 
@@ -32,20 +34,29 @@ public class OptionsManager : MonoBehaviour
         // Load saved sensitivity values
         float savedSensX = PlayerPrefs.GetFloat(SensXKey, 200.0f);
         float savedSensY = PlayerPrefs.GetFloat(SensYKey, 200.0f);
+        float savedMusicVol = PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
 
         // Set slider values
         sensXSlider.value = savedSensX;
         sensYSlider.value = savedSensY;
+        musicVolSlider.value = savedMusicVol;
 
         // Add listeners to handle slider value changes
         sensXSlider.onValueChanged.AddListener(OnSensXChanged);
         sensYSlider.onValueChanged.AddListener(OnSensYChanged);
+        musicVolSlider.onValueChanged.AddListener(OnMusicVolChanged);
     }
 
     private void OnSensXChanged(float value)
     {
         // Save the new value
         PlayerPrefs.SetFloat(SensXKey, value);
+        PlayerPrefs.Save();
+    }
+
+    private void OnMusicVolChanged(float value)
+    {
+        PlayerPrefs.SetFloat (MusicVolKey, value);
         PlayerPrefs.Save();
     }
 
@@ -65,5 +76,10 @@ public class OptionsManager : MonoBehaviour
     public float GetSensY()
     {
         return PlayerPrefs.GetFloat(SensYKey, 200f);
+    }
+
+    public float GetMusicVol()
+    {
+        return PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
     }
 }
