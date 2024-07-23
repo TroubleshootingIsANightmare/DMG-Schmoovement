@@ -17,4 +17,5 @@ public class KillPlayer : MonoBehaviour
             eventManager.died = true;
         }
     } 
+
 }

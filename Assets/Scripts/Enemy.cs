@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+
+    //Particle Effects
+    public GameObject shootFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -104,6 +107,7 @@ public class Enemy : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Instantiate(shootFX, shootPoint.position, shootPoint.rotation);
             Vector3 dir = target.position - shootPoint.position;
             rb.AddForce(dir.normalized * 32f, ForceMode.Impulse);
             ///End of attack code
