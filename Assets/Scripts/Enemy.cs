@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
 
+    //Sound
+    private AudioSource audioSource;
 
     //Particle Effects
     public GameObject shootFX;
@@ -43,6 +45,7 @@ public class Enemy : MonoBehaviour
         ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
         agent = this.GetComponent<NavMeshAgent>();
         rb = this.GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -108,6 +111,7 @@ public class Enemy : MonoBehaviour
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
             Instantiate(shootFX, shootPoint.position, shootPoint.rotation);
+            audioSource.Play();
             Vector3 dir = target.position - shootPoint.position;
             rb.AddForce(dir.normalized * 32f, ForceMode.Impulse);
 

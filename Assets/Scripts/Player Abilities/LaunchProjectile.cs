@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +26,8 @@ public class LaunchProjectile : MonoBehaviour
     float decreaseFactor = 1f; 
     float shakeAmount = 0.05f;
 
+    private AudioSource audioSource;
+
     public bool shooting;
     public bool canShoot;
 
@@ -34,6 +37,7 @@ public class LaunchProjectile : MonoBehaviour
     {
         shooting = false;
         canShoot = true;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -65,6 +69,7 @@ public class LaunchProjectile : MonoBehaviour
 
         GameObject currentBullet = Instantiate(projectile, shootPosition.position, Quaternion.identity);
         Instantiate(shootFX, shootPosition.position, gunHolder.rotation);
+        audioSource.Play();
 
         currentBullet.transform.forward = direction.normalized;
 

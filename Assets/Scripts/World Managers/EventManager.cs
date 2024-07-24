@@ -45,6 +45,8 @@ public class EventManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         died = false;
+        paused = false;
+        pauseMenu.SetActive(false);
     }
 
     private void Update()
