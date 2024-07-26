@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class OptionsManager : MonoBehaviour
     }
     void Start()
     {
+        
+
         DontDestroyOnLoad(gameObject);
         // Load saved sensitivity values
         float savedSensX = PlayerPrefs.GetFloat(SensXKey, 200.0f);
@@ -41,11 +44,21 @@ public class OptionsManager : MonoBehaviour
         sensYSlider.value = savedSensY;
         musicVolSlider.value = savedMusicVol;
 
+        //Set values at start
+        OnMusicVolChanged(savedMusicVol);
+        OnSensXChanged(savedSensX);
+        OnSensYChanged(savedSensY);
+
         // Add listeners to handle slider value changes
         sensXSlider.onValueChanged.AddListener(OnSensXChanged);
         sensYSlider.onValueChanged.AddListener(OnSensYChanged);
         musicVolSlider.onValueChanged.AddListener(OnMusicVolChanged);
+
+        Debug.Log(savedSensX);
+        Debug.Log(savedSensY);
+        Debug.Log(savedMusicVol);
     }
+
 
     private void OnSensXChanged(float value)
     {

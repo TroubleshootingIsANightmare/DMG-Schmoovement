@@ -15,7 +15,9 @@ public class EventManager : MonoBehaviour
     [Header("Death Menu")]
     public GameObject deathMenu;
     public bool died = false;
-    
+
+    public bool reloaded = false;
+
 
 
     private void Start() {
@@ -43,10 +45,18 @@ public class EventManager : MonoBehaviour
 
     public void ReloadScene()
     {
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        reloaded = true;
+        paused = false; 
         died = false;
-        paused = false;
-        pauseMenu.SetActive(false);
+        
+    }
+
+    public void SetPaused(bool pause)
+    {
+        paused = pause;
+        pauseMenu.SetActive(pause);
     }
 
     private void Update()
@@ -57,10 +67,15 @@ public class EventManager : MonoBehaviour
         Time.timeScale = paused ? 0 : 1;
         if (!paused) Time.timeScale = died ? 0 : 1;
         deathMenu.SetActive(died);
-        if (died) { paused = false; pauseMenu.SetActive(false); Debug.Log("DIED SETTING IT TO FALSE FOR NO REASON"); }
+        if (died) { paused = false; pauseMenu.SetActive(false); }
         if (!paused && pauseMenu.activeInHierarchy == false && SceneManager.GetActiveScene().buildIndex != 0 && !died) { cameraManager.TurnCam(); cameraManager.LockCursor();  }
-        if(!paused && pauseMenu.activeInHierarchy == true) paused = true;
+        
         if (paused) Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
+    }
+
+    private void LateUpdate()
+    {
+        if (!paused) { pauseMenu.SetActive(false); }
     }
 
     void TogglePause()
@@ -81,7 +96,7 @@ public class EventManager : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 0) { pauseMenu.SetActive(false); paused = false; Debug.Log("THIS IS THE ISSUE. BUILD INDEX THING!"); }
+        if (SceneManager.GetActiveScene().buildIndex == 0) { pauseMenu.SetActive(false); paused = false; }
     }
 
     void CheckDeath()

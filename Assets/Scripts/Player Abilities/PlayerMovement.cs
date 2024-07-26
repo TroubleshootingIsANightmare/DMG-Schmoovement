@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform player;
     public CameraManager cameraManager;
     public static PlayerMovement instance;
+    private CapsuleCollider collider;
+    private float colliderHeight = 2f;
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -63,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get collider
+        collider = GetComponent<CapsuleCollider>();
         //Grab the rigidbody from the player
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -178,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Slide()
     {
-        if(grounded) rb.AddForce(inputDirection.normalized * slideForce);
+        if(grounded && rb.velocity.magnitude > 0.3f) rb.AddForce(inputDirection.normalized * slideForce);
     }
 
     private void CounterMovement(float x, float y, Vector2 mag)
@@ -187,12 +191,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (sliding)
         {
+            collider.height = colliderHeight/2f;      
 
             rb.AddForce(speed * Time.deltaTime * -rb.velocity.normalized * slideCounterMovement);
 
             rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), 0.01f);
 
             return;
+        }
+
+        if (!sliding)
+        {
+            collider.height = colliderHeight;
         }
 
         if (horizontalInput == 0 && verticalInput == 0) rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(0, 0, 0), 0.5f);
@@ -234,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         else emit.rateOverTime = 0;
     }
 
-    
+
     //Eldritch abomination code(DO NOT MESS WITH OR IT BREAKS)
     void JumpAndSlideLogic()
     {
@@ -255,8 +265,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (!Input.GetKey(slideKey)) sliding = false;
 
-        if (sliding) Slide(); player.localScale = slideScale; transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        if (!sliding) player.localScale = playerScale; playerHeight = 1.4f; transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        if (sliding)  Slide(); player.localScale = slideScale; transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+        if (!sliding) player.localScale = playerScale; playerHeight = 1.4f; transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z); 
     }
 
     public void SetPosition()
