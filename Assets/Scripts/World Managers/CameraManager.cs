@@ -49,6 +49,7 @@ public class CameraManager : MonoBehaviour
               sensY = options.GetSensY();
            }
         if (SceneManager.GetActiveScene().buildIndex == 0) { ResetRotation(); }
+        if (SceneManager.GetActiveScene().buildIndex != 0) { TurnCam(); }
 
     }
 
@@ -62,25 +63,14 @@ public class CameraManager : MonoBehaviour
         playerCam.position = camPos.position;
     }
 
-    public void LockCursor()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-    }
+
 
     public void TurnCam()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensY * Time.deltaTime;
-
+        Debug.Log(mouseX);
+        Debug.Log(mouseY);
         yRotation += mouseX;
 
         xRotation -= mouseY;

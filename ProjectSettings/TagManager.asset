@@ -9,6 +9,7 @@ TagManager:
   - ySlider
   - Enemy
   - Target
+  - musicSlider
   layers:
   - Default
   - TransparentFX

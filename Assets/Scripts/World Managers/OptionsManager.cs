@@ -1,7 +1,9 @@
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour
@@ -9,6 +11,8 @@ public class OptionsManager : MonoBehaviour
     public Slider sensXSlider;
     public Slider sensYSlider;
     public Slider musicVolSlider;
+
+     
 
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
@@ -28,6 +32,11 @@ public class OptionsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Update()
+    {
+
     }
     void Start()
     {

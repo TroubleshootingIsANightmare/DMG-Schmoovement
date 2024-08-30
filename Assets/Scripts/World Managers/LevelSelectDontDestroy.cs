@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyManager : MonoBehaviour
+public class LevelSelectDontDestroy : MonoBehaviour
 {
-    private static DontDestroyManager instance;
+    private static LevelSelectDontDestroy instance;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
