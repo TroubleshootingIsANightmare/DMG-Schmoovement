@@ -14,6 +14,7 @@ public class ExplosiveProjectile : MonoBehaviour
     public Enemy enemy;
     public LayerMask canExplode;
     public int exploded = 0;
+    double mult = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +23,16 @@ public class ExplosiveProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-            if ((other.gameObject.tag == "Ground" || other.gameObject.tag == "Enemy" ) && exploded < 2)
+            if ((other.gameObject.tag == "Ground" || other.gameObject.tag == "Enemy" || other.gameObject.layer == 9) && exploded < 2)
             {
+                if(other.gameObject.layer == 9)
+            {
+                mult = 1.5;
+                Debug.Log("WALL!!!!!!!!");
+            } else
+            {
+                mult = 1;
+            }
                 exploded++;
                 Destroy(projectile);
                 Explode();
@@ -55,8 +64,8 @@ public class ExplosiveProjectile : MonoBehaviour
                 Vector2 locate = new Vector2(hit.gameObject.transform.position.x, hit.gameObject.transform.position.z);
                 Vector2 direction = new Vector2(locate.x - explosionPos.x, locate.y - explosionPos.z);
                 direction.Normalize();
-                rb.AddForce(new Vector3(direction.x * knockback, 0, direction.y * knockback));
-                rb.AddExplosionForce(power, explosionPos, radius, 4);
+                rb.AddForce(new Vector3(direction.x * knockback * (float)mult, 0, direction.y * knockback * (float)mult));
+                rb.AddExplosionForce(power * (float)mult, explosionPos, radius, 2);
                 affectedRigidbodies.Add(rb);
             }
 

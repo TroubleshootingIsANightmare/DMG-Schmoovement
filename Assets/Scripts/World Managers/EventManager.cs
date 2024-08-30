@@ -110,7 +110,8 @@ public class EventManager : MonoBehaviour
 
     void CheckDeath()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0 && died) Time.timeScale = 0; Cursor.lockState = CursorLockMode.None; Cursor.visible = true; 
+        if (SceneManager.GetActiveScene().buildIndex != 0 && died) Time.timeScale = 0; Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
+        if (SceneManager.GetActiveScene().buildIndex == 0) { died = false; }
     }
 
     public void CloseGame()
