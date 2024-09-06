@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading;
+using TMPro;
 
 public class EventManager : MonoBehaviour
 {
@@ -18,8 +20,8 @@ public class EventManager : MonoBehaviour
 
     public bool reloaded = false;
 
-
-
+    [Header("Timer")]
+    public TMP_Text timer;
     private void Start() {
         DontDestroyOnLoad(gameObject);
 
@@ -68,7 +70,7 @@ public class EventManager : MonoBehaviour
         if (!paused) Time.timeScale = died ? 0 : 1;
         deathMenu.SetActive(died);
         if (died) { paused = false; pauseMenu.SetActive(false); }
-
+        timer.gameObject.SetActive(SceneManager.GetActiveScene().buildIndex != 0);
         if (SceneManager.GetActiveScene().buildIndex == 0 || paused || died)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -105,7 +107,7 @@ public class EventManager : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().buildIndex == 0) { pauseMenu.SetActive(false); paused = false; }
+        if (SceneManager.GetActiveScene().buildIndex == 0) { pauseMenu.SetActive(false); paused = false;  }
     }
 
     void CheckDeath()
