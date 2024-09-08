@@ -10,7 +10,7 @@ public class Grapple : MonoBehaviour
     private Vector3 gPoint;
     private Vector3 targetPoint;
     private GameObject player;
-    private SpringJoint joint;
+    public SpringJoint joint;
     public LayerMask canGrapple;
 
 

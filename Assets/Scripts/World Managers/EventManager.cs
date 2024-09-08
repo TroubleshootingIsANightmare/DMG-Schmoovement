@@ -22,6 +22,9 @@ public class EventManager : MonoBehaviour
 
     [Header("Timer")]
     public TMP_Text timer;
+
+    [Header("Crosshair")]
+    public GameObject crosshair;
     private void Start() {
         DontDestroyOnLoad(gameObject);
 
@@ -71,6 +74,7 @@ public class EventManager : MonoBehaviour
         deathMenu.SetActive(died);
         if (died) { paused = false; pauseMenu.SetActive(false); }
         timer.gameObject.SetActive(SceneManager.GetActiveScene().buildIndex != 0);
+        crosshair.SetActive(SceneManager.GetActiveScene().buildIndex != 0);
         if (SceneManager.GetActiveScene().buildIndex == 0 || paused || died)
         {
             Cursor.lockState = CursorLockMode.None;
