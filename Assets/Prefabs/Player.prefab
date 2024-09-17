@@ -312,6 +312,7 @@ MonoBehaviour:
   orientation: {fileID: 4122902485927314099}
   playerHeight: 1.4
   player: {fileID: 5961306543607173762}
+  cameraManager: {fileID: 0}
   jumpKey: 32
   slideKey: 304
   ground:
@@ -757,9 +758,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54bd67f2f61dbf47be4f83267662f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joint: {fileID: 0}
   canGrapple:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
 --- !u!120 &2774263805094915954
 LineRenderer:
   serializedVersion: 2
@@ -2057,6 +2059,7 @@ MonoBehaviour:
   songs:
   - {fileID: 8300000, guid: 4a10697a6166a434cb5f87d44aa031d1, type: 3}
   - {fileID: 8300000, guid: 0cdb4db71a8716b4d8b83cc355406a46, type: 3}
+  options: {fileID: 0}
 --- !u!1 &6480961454900676664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2354,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8257928079569425312, guid: aec4ac5b1efd41b4ca849fa72e9d29bc, type: 3}
+  - {fileID: 2100000, guid: ab8aabc0455e9d14daf965cfab33643d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
