@@ -66,7 +66,6 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Died = " + died + " Paused = " + paused);
         CheckDeath();
         TogglePause();
         Time.timeScale = paused ? 0 : 1;
@@ -97,15 +96,12 @@ public class EventManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0 && !died)
         {
-            Debug.Log("TRIED TO PAUSE");
             if (paused)
             {
                 pauseMenu.SetActive(false);
                 paused = false;
-                Debug.Log("UNPAUSE!");
             } else if(!paused)
             {
-                Debug.Log("PAUSE!");
                 pauseMenu.SetActive(true);
                 paused = true;
             }
