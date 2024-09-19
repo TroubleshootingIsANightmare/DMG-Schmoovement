@@ -11,12 +11,14 @@ public class OptionsManager : MonoBehaviour
     public Slider sensXSlider;
     public Slider sensYSlider;
     public Slider musicVolSlider;
-
-     
+    public TMP_InputField username;
+    public int hasName = 0;
 
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
     private const string MusicVolKey = "MusicVol";
+    private const string usernameKey = "username";
+    private const string hasNameKey = "hasName";
 
     public static OptionsManager instance;
 
