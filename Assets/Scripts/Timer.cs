@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
     public TMP_Text _time;
     public float i;
+    public Win win;
     PlayerMovement playerMovement;
     // Start is called before the first frame update
     void Start()
@@ -29,8 +31,16 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        i += 1f/50f;
-        _time.text = "Time: " + String.Format("{0:0.00}", i);
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            win = GameObject.Find("GoalCube").GetComponent<Win>();
+            if(!win.win)
+            {
+                i += 1f / 50f;
+                _time.text = "Time: " + String.Format("{0:0.00}", i);
+            }
+        }
+        
     }
 
 
