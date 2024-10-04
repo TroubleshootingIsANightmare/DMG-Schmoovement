@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
+using Unity.Services.Leaderboards;
 
 public class Timer : MonoBehaviour
 {
