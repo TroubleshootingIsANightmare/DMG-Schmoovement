@@ -25,6 +25,8 @@ public class EventManager : MonoBehaviour
 
     [Header("Crosshair")]
     public GameObject crosshair;
+
+    public GameObject player;
     private void Start() {
         DontDestroyOnLoad(gameObject);
 
@@ -108,6 +110,7 @@ public class EventManager : MonoBehaviour
         }
 
         if (SceneManager.GetActiveScene().buildIndex == 0) { pauseMenu.SetActive(false); paused = false;  }
+       
     }
 
     void CheckDeath()

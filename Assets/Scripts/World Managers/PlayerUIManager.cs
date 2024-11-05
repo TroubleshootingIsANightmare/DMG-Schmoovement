@@ -7,6 +7,7 @@ public class PlayerUIManager : MonoBehaviour
 {
     [SerializeField] GameObject controlObject;
     public static PlayerUIManager instance;
+    public GameObject crosshair;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -33,7 +34,7 @@ public class PlayerUIManager : MonoBehaviour
 
     private void DisplayControls()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0) { controlObject.SetActive(true); } else { controlObject.SetActive(false); }
+        if (SceneManager.GetActiveScene().buildIndex != 0) { controlObject.SetActive(true); crosshair.SetActive(true); } else { controlObject.SetActive(false); crosshair.SetActive(false); }
 
     }
 
