@@ -2907,6 +2907,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563663529}
   m_CullTransparentMesh: 1
+--- !u!1 &565308794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5478762993861238383, guid: e39551a5e70f1f949a44b43dfe4c8bb0, type: 3}
+  m_PrefabInstance: {fileID: 1733265972867681137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &570825282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,7 +2995,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1242268808}
+      - m_Target: {fileID: 1202220984}
         m_TargetAssemblyTypeName: Login, Assembly-CSharp
         m_MethodName: SignUp
         m_Mode: 1
@@ -5437,7 +5442,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1242268808}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Login, Assembly-CSharp
         m_MethodName: SignOut
         m_Mode: 1
@@ -5911,12 +5916,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4670799726549117193, guid: e39551a5e70f1f949a44b43dfe4c8bb0, type: 3}
   m_PrefabInstance: {fileID: 1733265972867681137}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 565308794}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a68c04666846bf419056396d086f7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1202220984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565308794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb5d85d3f2aa7542b4bc3bce8a1fc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signInDisplay: {fileID: 1242268807}
+  usernameInput: {fileID: 382726592}
+  passwordInput: {fileID: 1181674863}
+  errorMessageText: {fileID: 1493880127}
+  displayErrorDuration: 5
 --- !u!1 &1208666906
 GameObject:
   m_ObjectHideFlags: 0
@@ -6198,6 +6220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486fc3a2bbd16a7429e9f1f928aaca1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wonk: 
+  inputField: {fileID: 382726592}
 --- !u!1 &1242268807
 GameObject:
   m_ObjectHideFlags: 0
@@ -6210,7 +6234,6 @@ GameObject:
   - component: {fileID: 1242268811}
   - component: {fileID: 1242268810}
   - component: {fileID: 1242268809}
-  - component: {fileID: 1242268808}
   m_Layer: 5
   m_Name: LoginCanvas
   m_TagString: Untagged
@@ -6218,23 +6241,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1242268808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242268807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb5d85d3f2aa7542b4bc3bce8a1fc50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signInDisplay: {fileID: 1242268807}
-  usernameInput: {fileID: 382726592}
-  passwordInput: {fileID: 1181674863}
-  errorMessageText: {fileID: 1493880127}
-  displayErrorDuration: 5
 --- !u!114 &1242268809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10693,7 +10699,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1242268808}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Login, Assembly-CSharp
         m_MethodName: SignIn
         m_Mode: 1
@@ -11052,7 +11058,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5478762993861238383, guid: e39551a5e70f1f949a44b43dfe4c8bb0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1202220984}
   m_SourcePrefab: {fileID: 100100000, guid: e39551a5e70f1f949a44b43dfe4c8bb0, type: 3}
 --- !u!1001 &5481290336280940182
 PrefabInstance:

@@ -13,6 +13,7 @@ public class Login : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInput = default;
     [SerializeField] private TMP_InputField passwordInput = default;
     [SerializeField] private TextMeshProUGUI errorMessageText = default;
+    
 
     public float displayErrorDuration = 5f;
 
@@ -25,6 +26,7 @@ public class Login : MonoBehaviour
     {
 
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+
         if (isSignedIn)
         {
             signInDisplay.SetActive(false);
@@ -89,6 +91,7 @@ public class Login : MonoBehaviour
 
     async Task SignInWithUsernameAndPassword(string username, string password)
     {
+
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
