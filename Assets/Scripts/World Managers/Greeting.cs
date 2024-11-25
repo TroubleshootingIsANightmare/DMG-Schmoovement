@@ -9,6 +9,7 @@ public class Greeting : MonoBehaviour
 {
     public string wonk;
     public TMP_InputField inputField;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,4 +22,5 @@ public class Greeting : MonoBehaviour
         wonk = inputField.text;
         gameObject.GetComponent<TMP_Text>().SetText("Welcome to my game, " + wonk + ". Have a fun time!");
     }
+
 }

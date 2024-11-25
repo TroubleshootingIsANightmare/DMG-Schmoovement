@@ -13,8 +13,8 @@ public class Login : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInput = default;
     [SerializeField] private TMP_InputField passwordInput = default;
     [SerializeField] private TextMeshProUGUI errorMessageText = default;
-    
-
+    [SerializeField] public GameObject titleScreenCanvas;
+    public EventManager eventManager;
     public float displayErrorDuration = 5f;
 
     async void Awake()
@@ -24,7 +24,8 @@ public class Login : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        eventManager = FindAnyObjectByType<EventManager>();
+        usernameInput.text = eventManager.playerName;
         bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
 
         if (isSignedIn)
@@ -37,19 +38,25 @@ public class Login : MonoBehaviour
     {
         string usernameText = usernameInput.text;
         string passwordText = passwordInput.text;
+        eventManager.playerName = usernameText;
         await SignInWithUsernameAndPassword(usernameText, passwordText);
+        Invoke("GoToTitleScreen", displayErrorDuration);
     }
 
     public async void SignUp()
     {
         string usernameText = usernameInput.text;
         string passwordText = passwordInput.text;
+        eventManager.playerName = usernameText;
         await SignUpWithUsernameAndPassword(usernameText, passwordText);
+        Invoke("GoToTitleScreen", displayErrorDuration);
     }
 
     public async void SignOut()
     {
         await SignOutOfGame();
+        usernameInput.text = default;
+        passwordInput.text = default;
     }
 
     async Task SignOutOfGame()
@@ -77,6 +84,7 @@ public class Login : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
+            errorMessageText.text = "";
             Debug.Log("Sign-up successful");
         }
         catch (AuthenticationException ex)
@@ -95,6 +103,7 @@ public class Login : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            errorMessageText.text = "";
             Debug.Log("Sign-in successful");
         }
         catch (AuthenticationException ex)
@@ -117,4 +126,19 @@ public class Login : MonoBehaviour
     {
         errorMessageText.gameObject.SetActive(false);
     }
+
+    private void GoToTitleScreen()
+    {
+        if(errorMessageText.text == "") {
+            signInDisplay.SetActive(false);
+            titleScreenCanvas.SetActive(true);
+        }
+        
+    }
+
+    public string GetName()
+    {
+        return usernameInput.text;
+    }
+
 }
