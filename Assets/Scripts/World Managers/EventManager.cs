@@ -29,6 +29,8 @@ public class EventManager : MonoBehaviour
     public GameObject player;
     public Greeting greeting;
     public string playerName;
+
+    public LeaderboardManager leaderboardManager;
     private void Start() {
         DontDestroyOnLoad(gameObject);
 

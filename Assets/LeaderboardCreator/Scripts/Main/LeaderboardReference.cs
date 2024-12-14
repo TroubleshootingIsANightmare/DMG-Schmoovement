@@ -9,10 +9,10 @@ namespace Dan.Main
 
         public LeaderboardReference(string publicKey) => PublicKey = publicKey;
 
-        public void UploadNewEntry(string username, int score, Action<bool> callback = null, Action<string> errorCallback = null) => 
+        public void UploadNewEntry(string username, float score, Action<bool> callback = null, Action<string> errorCallback = null) => 
             LeaderboardCreator.UploadNewEntry(PublicKey, username, score, callback, errorCallback);
         
-        public void UploadNewEntry(string username, int score, string extraData, Action<bool> callback = null, Action<string> errorCallback = null) => 
+        public void UploadNewEntry(string username, float score, string extraData, Action<bool> callback = null, Action<string> errorCallback = null) => 
             LeaderboardCreator.UploadNewEntry(PublicKey, username, score, extraData, callback, errorCallback);
 
         public void GetEntries(Action<Entry[]> callback, Action<string> errorCallback = null) => 

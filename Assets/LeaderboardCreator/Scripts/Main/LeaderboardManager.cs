@@ -3,18 +3,17 @@ using TMPro;
 
 // NOTE: Make sure to include the following namespace wherever you want to access Leaderboard Creator methods
 using Dan.Main;
-
+using PlasticGui.Configuration.CloudEdition.Welcome;
 namespace LeaderboardCreatorDemo
 {
     public class LeaderboardManager : MonoBehaviour
     {
         [SerializeField] private TMP_Text[] _entryTextObjects;
         [SerializeField] private TMP_InputField _usernameInputField;
-
 // Make changes to this section according to how you're storing the player's score:
 // ------------------------------------------------------------
         [SerializeField] private LeaderboardManager _exampleGame;
-        private int Score => _exampleGame.Score;
+        private float Score => _exampleGame.Score;
 // ------------------------------------------------------------
 
         private void Start()
@@ -38,9 +37,9 @@ namespace LeaderboardCreatorDemo
             });
         }
         
-        public void UploadEntry()
+        public void UploadEntry(string username, float time)
         {
-             Leaderboards.TutorialTimes.UploadNewEntry(_usernameInputField.text, Score, isSuccessful =>
+             Leaderboards.TutorialTimes.UploadNewEntry(username, time, isSuccessful =>
             {
                 if (isSuccessful)
                     LoadEntries();

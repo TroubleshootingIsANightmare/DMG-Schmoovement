@@ -5891,6 +5891,7 @@ MonoBehaviour:
   passwordInput: {fileID: 1181674863}
   errorMessageText: {fileID: 1493880127}
   titleScreenCanvas: {fileID: 2054101209}
+  eventManager: {fileID: 1202220982}
   displayErrorDuration: 5
 --- !u!1 &1208666906
 GameObject:

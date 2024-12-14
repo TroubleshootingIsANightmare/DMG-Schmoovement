@@ -132,7 +132,12 @@ public class Login : MonoBehaviour
         if(errorMessageText.text == "") {
             signInDisplay.SetActive(false);
             titleScreenCanvas.SetActive(true);
+        } else if (AuthenticationService.Instance.IsSignedIn)
+        {
+            signInDisplay.SetActive(false);
+            titleScreenCanvas.SetActive(true);
         }
+      
         
     }
 
