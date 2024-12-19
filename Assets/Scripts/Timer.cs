@@ -7,46 +7,48 @@ using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 using Unity.Services.Leaderboards;
-
-public class Timer : MonoBehaviour
+namespace LeaderboardCreatorDemo
 {
-    public TMP_Text _time;
-    public float i;
-    public Win win;
-    PlayerMovement playerMovement;
-    // Start is called before the first frame update
-    void Start()
+    public class Timer : MonoBehaviour
     {
-        _time = GetComponent<TMP_Text>();
-        i = 0f;
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-    }
-    private void Update()
-    {
-        if (!playerMovement.spawned)
+        public TMP_Text _time;
+        public float i;
+        public Win win;
+        PlayerMovement playerMovement;
+        // Start is called before the first frame update
+        void Start()
         {
+            _time = GetComponent<TMP_Text>();
             i = 0f;
+            playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         }
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        private void Update()
         {
-            win = GameObject.Find("GoalCube").GetComponent<Win>();
-            if(!win.win)
+            if (!playerMovement.spawned)
             {
-                i += 1f / 50f;
-                _time.text = "Time: " + String.Format("{0:0.00}", i);
+                i = 0f;
             }
         }
-        
-    }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                win = GameObject.Find("GoalCube").GetComponent<Win>();
+                if (!win.win)
+                {
+                    i += 1f / 50f;
+                    _time.text = "Time: " + String.Format("{0:0.00}", i);
+                }
+            }
+
+        }
 
 
-    public float returnTime()
-    {
-        return i;
+        public float returnTime()
+        {
+            return i;
+        }
     }
 }

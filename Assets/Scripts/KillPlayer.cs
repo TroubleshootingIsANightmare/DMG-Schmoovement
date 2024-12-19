@@ -3,39 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class KillPlayer : MonoBehaviour
+namespace LeaderboardCreatorDemo
 {
-    EventManager eventManager;
-    
-    PlayerMovement playerMovement;
-    Grapple grapple;
-    private void Start()
+    public class KillPlayer : MonoBehaviour
     {
-        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>(); 
-        grapple = FindFirstObjectByType<Grapple>();
-    }
+        EventManager eventManager;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
+        PlayerMovement playerMovement;
+        Grapple grapple;
+        private void Start()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Destroy(grapple.joint);
-            playerMovement.spawned = false;
-            Timer time = eventManager.timer.gameObject.GetComponent<Timer>();
-            time.i = 0f;
+            eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+            playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+            grapple = FindFirstObjectByType<Grapple>();
         }
-    }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player") { 
-            eventManager.died = true;
-            playerMovement.spawned = false;
-            Timer time = eventManager.timer.gameObject.GetComponent<Timer>();
-            time.i = 0f;    
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Destroy(grapple.joint);
+                playerMovement.spawned = false;
+                Timer time = eventManager.timer.gameObject.GetComponent<Timer>();
+                time.i = 0f;
+            }
         }
-    } 
-    
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                eventManager.died = true;
+                playerMovement.spawned = false;
+                Timer time = eventManager.timer.gameObject.GetComponent<Timer>();
+                time.i = 0f;
+            }
+        }
+
+    }
 }

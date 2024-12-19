@@ -8,40 +8,47 @@ using System.Threading.Tasks;
 using Unity.Services.Leaderboards.Models;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-
-public class Win : MonoBehaviour
+using Dan.Main;
+namespace LeaderboardCreatorDemo
 {
-    public bool win = false;
-    public Timer timer;
-
-    private async void Awake()
+    public class Win : MonoBehaviour
     {
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-    }
-
-    private void FixedUpdate()
-    {
-        timer = GameObject.Find("/Player GUI/Timer").GetComponent<Timer>();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
+        public bool win = false;
+        public Timer timer;
+        public LeaderboardManager leaderboardManager;
+        public EventManager eventManager;
+        private async void Awake()
         {
-            FinishLevel();
-        }
-    }
+            await UnityServices.InitializeAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-    public void FinishLevel()
-    {
-        win = true;
-        AddScore();
-        
-    }
-    public async void AddScore()
-    {
-        
-        var playerEntry = await LeaderboardsService.Instance
-            .AddPlayerScoreAsync("TutorialSpeed", timer.returnTime());
+        }
+        private void Start()
+        {
+            leaderboardManager = FindAnyObjectByType<LeaderboardManager>();
+            eventManager = FindAnyObjectByType<EventManager>();
+        }
+        private void FixedUpdate()
+        {
+            timer = GameObject.Find("/Player GUI/Timer").GetComponent<Timer>();
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                FinishLevel();
+            }
+        }
+
+        public void FinishLevel()
+        {
+            win = true;
+            AddScore();
+
+        }
+        public void AddScore()
+        {
+            leaderboardManager.UploadEntry(eventManager.playerName, timer.i);
+        }
     }
 }

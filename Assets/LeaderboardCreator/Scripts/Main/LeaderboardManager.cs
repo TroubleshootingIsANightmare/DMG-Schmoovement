@@ -3,7 +3,6 @@ using TMPro;
 
 // NOTE: Make sure to include the following namespace wherever you want to access Leaderboard Creator methods
 using Dan.Main;
-using PlasticGui.Configuration.CloudEdition.Welcome;
 namespace LeaderboardCreatorDemo
 {
     public class LeaderboardManager : MonoBehaviour
@@ -16,10 +15,10 @@ namespace LeaderboardCreatorDemo
         private float Score => _exampleGame.Score;
 // ------------------------------------------------------------
 
-        private void Start()
-        {
-            LoadEntries();
-        }
+        //private void Start()
+        //{
+        //    LoadEntries();
+        //}
 
         private void LoadEntries()
         {
@@ -39,11 +38,7 @@ namespace LeaderboardCreatorDemo
         
         public void UploadEntry(string username, float time)
         {
-             Leaderboards.TutorialTimes.UploadNewEntry(username, time, isSuccessful =>
-            {
-                if (isSuccessful)
-                    LoadEntries();
-            });
+            Leaderboards.TutorialTimes.UploadNewEntry(username, time);
         }
     }
 }
