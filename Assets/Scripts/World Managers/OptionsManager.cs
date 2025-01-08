@@ -11,12 +11,15 @@ public class OptionsManager : MonoBehaviour
     public Slider sensXSlider;
     public Slider sensYSlider;
     public Slider musicVolSlider;
+    public TMP_InputField username;
     public int hasName = 0;
     public GameObject titleCanvas;
 
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
     private const string MusicVolKey = "MusicVol";
+    private const string usernameKey = "username";
+    private const string hasNameKey = "hasName";
 
     public static OptionsManager instance;
 
@@ -40,7 +43,8 @@ public class OptionsManager : MonoBehaviour
     }
     void Start()
     {
-        
+        username = GameObject.Find("/LoginCanvas/InputField (TMP)").GetComponent<TMP_InputField>();
+
         DontDestroyOnLoad(gameObject);
         // Load saved sensitivity values
         float savedSensX = PlayerPrefs.GetFloat(SensXKey, 200.0f);
@@ -62,7 +66,14 @@ public class OptionsManager : MonoBehaviour
         sensYSlider.onValueChanged.AddListener(OnSensYChanged);
         musicVolSlider.onValueChanged.AddListener(OnMusicVolChanged);
 
-        
+        //Check for name 
+        hasName = PlayerPrefs.GetInt("hasName", 0);
+        if(hasName > 0)
+        {
+            GameObject.Find("LoginCanvas").SetActive(false);
+            titleCanvas.SetActive(true);
+            Debug.Log(PlayerPrefs.GetString("username"));
+        }
 
     }
 
@@ -103,5 +114,11 @@ public class OptionsManager : MonoBehaviour
         return PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
     }
 
-    
+    public void SetUsername()
+    {
+        PlayerPrefs.SetString("username", username.text);
+        hasName = 1;
+        PlayerPrefs.SetInt("hasName", hasName);
+        PlayerPrefs.Save();
+    }
 }

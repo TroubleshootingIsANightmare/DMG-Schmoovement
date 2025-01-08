@@ -25,12 +25,15 @@ public class EventManager : MonoBehaviour
 
     [Header("Crosshair")]
     public GameObject crosshair;
+<<<<<<< HEAD
 
     public GameObject player;
     public Greeting greeting;
     public string playerName;
 
     public LeaderboardManager leaderboardManager;
+=======
+>>>>>>> parent of 59e3ee0 (Added login and began leaderboard creation)
     private void Start() {
         DontDestroyOnLoad(gameObject);
 
@@ -115,7 +118,6 @@ public class EventManager : MonoBehaviour
         }
 
         if (SceneManager.GetActiveScene().buildIndex == 0) { pauseMenu.SetActive(false); paused = false;  }
-       
     }
 
     void CheckDeath()
