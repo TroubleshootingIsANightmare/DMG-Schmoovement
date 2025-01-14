@@ -11,7 +11,6 @@ public class OptionsManager : MonoBehaviour
     public Slider sensXSlider;
     public Slider sensYSlider;
     public Slider musicVolSlider;
-    public int hasName = 0;
     public GameObject titleCanvas;
 
     private const string SensXKey = "SensX";

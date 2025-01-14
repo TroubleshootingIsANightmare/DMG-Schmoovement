@@ -27,10 +27,9 @@ public class EventManager : MonoBehaviour
     public GameObject crosshair;
 
     public GameObject player;
-    public Greeting greeting;
+
     public string playerName;
 
-    public LeaderboardManager leaderboardManager;
     private void Start() {
         DontDestroyOnLoad(gameObject);
 
@@ -72,7 +71,6 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
-        greeting = FindAnyObjectByType<Greeting>();
         CheckDeath();
         TogglePause();
         Time.timeScale = paused ? 0 : 1;
