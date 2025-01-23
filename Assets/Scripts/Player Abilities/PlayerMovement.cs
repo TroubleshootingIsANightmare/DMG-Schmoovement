@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform player;
     public CameraManager cameraManager;
     public static PlayerMovement instance;
-    private CapsuleCollider collider;
+    private CapsuleCollider collider;   
     private float colliderHeight = 2f;
 
     [Header("Keys")]
