@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -8,6 +9,7 @@ public class ExplosiveProjectile : MonoBehaviour
 {
     public float power = 500f;
     public float knockback = 400f;
+    public float upforce = 200f;
     public float radius = 6.5f;
     public GameObject explosiveFX;
     private GameObject projectile;
@@ -64,7 +66,7 @@ public class ExplosiveProjectile : MonoBehaviour
                 Vector2 locate = new Vector2(hit.gameObject.transform.position.x, hit.gameObject.transform.position.z);
                 Vector2 direction = new Vector2(locate.x - explosionPos.x, locate.y - explosionPos.z);
                 direction.Normalize();
-                rb.AddForce(new Vector3(direction.x * knockback * (float)mult, 0, direction.y * knockback * (float)mult));
+                rb.AddForce(new Vector3(direction.x * knockback * (float)mult, upforce*(hit.gameObject.transform.position-explosionPos).normalized.y, direction.y * knockback * (float)mult));
                 rb.AddExplosionForce(power * (float)mult, explosionPos, radius, 2);
                 affectedRigidbodies.Add(rb);
             }
