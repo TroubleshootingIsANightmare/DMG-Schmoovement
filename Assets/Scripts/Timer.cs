@@ -7,8 +7,8 @@ using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 using Unity.Services.Leaderboards;
-namespace LeaderboardCreatorDemo
-{
+
+
     public class Timer : MonoBehaviour
     {
         public TMP_Text _time;
@@ -50,5 +50,9 @@ namespace LeaderboardCreatorDemo
         {
             return i;
         }
+        
+        public void setTime(float time)
+        {
+            i = time;
+        }
     }
-}

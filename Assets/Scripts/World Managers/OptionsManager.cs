@@ -12,7 +12,10 @@ public class OptionsManager : MonoBehaviour
     public Slider sensYSlider;
     public Slider musicVolSlider;
     public GameObject titleCanvas;
+    public GameObject tutorialTimeDisplay;
 
+    private const string LevelOneKey = "LevelOneTime";
+    private const string LevelTutorialKey = "LevelTutorialTime";
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
     private const string MusicVolKey = "MusicVol";
@@ -35,7 +38,10 @@ public class OptionsManager : MonoBehaviour
 
     public void Update()
     {
-
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            tutorialTimeDisplay = GameObject.FindGameObjectWithTag("Tutorial Time");
+        }
     }
     void Start()
     {
@@ -45,17 +51,17 @@ public class OptionsManager : MonoBehaviour
         float savedSensX = PlayerPrefs.GetFloat(SensXKey, 200.0f);
         float savedSensY = PlayerPrefs.GetFloat(SensYKey, 200.0f);
         float savedMusicVol = PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
-
+        float savedTutorialTime = PlayerPrefs.GetFloat(LevelTutorialKey, 9999f);
         // Set slider values
         sensXSlider.value = savedSensX;
         sensYSlider.value = savedSensY;
         musicVolSlider.value = savedMusicVol;
-
+        tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + savedTutorialTime;
         //Set values at start
         OnMusicVolChanged(savedMusicVol);
         OnSensXChanged(savedSensX);
         OnSensYChanged(savedSensY);
-
+        SetTutorialTime(savedTutorialTime);
         // Add listeners to handle slider value changes
         sensXSlider.onValueChanged.AddListener(OnSensXChanged);
         sensYSlider.onValueChanged.AddListener(OnSensYChanged);
@@ -86,6 +92,13 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void SetTutorialTime(float value)
+    {
+        PlayerPrefs.SetFloat(LevelTutorialKey, value);
+        PlayerPrefs.Save();
+    }
+
+
     // Optionally, you can have a method to get the sensitivity values
     public float GetSensX()
     {
@@ -102,5 +115,9 @@ public class OptionsManager : MonoBehaviour
         return PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
     }
 
-    
+    public float GetTutorialTime()
+    {
+        return PlayerPrefs.GetFloat(LevelTutorialKey, 9999f);
+    }
+
 }

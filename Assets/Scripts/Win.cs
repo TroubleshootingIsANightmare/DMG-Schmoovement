@@ -9,24 +9,25 @@ using Unity.Services.Leaderboards.Models;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Dan.Main;
-namespace LeaderboardCreatorDemo
-{
+
+
     public class Win : MonoBehaviour
     {
         public bool win = false;
         public Timer timer;
-        public LeaderboardManager leaderboardManager;
+        public OptionsManager optionsManager;
         public EventManager eventManager;
+        float winTime;
+        float bestTime;
         private async void Awake()
         {
-            await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
         }
         private void Start()
         {
-            leaderboardManager = FindAnyObjectByType<LeaderboardManager>();
             eventManager = FindAnyObjectByType<EventManager>();
+            optionsManager = FindAnyObjectByType<OptionsManager>();
         }
         private void FixedUpdate()
         {
@@ -43,12 +44,9 @@ namespace LeaderboardCreatorDemo
         public void FinishLevel()
         {
             win = true;
-            AddScore();
+            winTime = timer.returnTime();
+            bestTime = optionsManager.GetTutorialTime();
+            optionsManager.SetTutorialTime(Mathf.Min(winTime, bestTime));
+        }
 
-        }
-        public void AddScore()
-        {
-            leaderboardManager.UploadEntry(eventManager.playerName, timer.i);
-        }
     }
-}

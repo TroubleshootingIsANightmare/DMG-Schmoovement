@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Target
   - musicSlider
+  - Tutorial Time
   layers:
   - Default
   - TransparentFX

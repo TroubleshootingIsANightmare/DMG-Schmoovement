@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour
 
     [Header("Timer")]
     public TMP_Text timer;
-
+    public Timer timerScript;
     [Header("Crosshair")]
     public GameObject crosshair;
 
@@ -50,6 +50,7 @@ public class EventManager : MonoBehaviour
     public void ChangeScene(int i)
     {
         SceneManager.LoadScene(i);
+        timerScript.setTime(0);
         died = false;
     }
 
