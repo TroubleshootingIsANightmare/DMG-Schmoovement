@@ -1,7 +1,9 @@
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -41,6 +43,7 @@ public class OptionsManager : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
             tutorialTimeDisplay = GameObject.FindGameObjectWithTag("Tutorial Time");
+            tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelTutorialKey, 9999f));
         }
     }
     void Start()
@@ -56,7 +59,7 @@ public class OptionsManager : MonoBehaviour
         sensXSlider.value = savedSensX;
         sensYSlider.value = savedSensY;
         musicVolSlider.value = savedMusicVol;
-        tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + savedTutorialTime;
+        tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedTutorialTime);
         //Set values at start
         OnMusicVolChanged(savedMusicVol);
         OnSensXChanged(savedSensX);
