@@ -9,9 +9,10 @@ using Unity.Services.Leaderboards.Models;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Dan.Main;
+using UnityEngine.SceneManagement;
 
 
-    public class Win : MonoBehaviour
+public class Win : MonoBehaviour
     {
         public bool win = false;
         public Timer timer;
@@ -45,8 +46,20 @@ using Dan.Main;
         {
             win = true;
             winTime = timer.returnTime();
-            bestTime = optionsManager.GetTutorialTime();
-            optionsManager.SetTutorialTime(Mathf.Min(winTime, bestTime));
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 0:
+                break;
+            case 1:
+                bestTime = optionsManager.GetTutorialTime();
+                optionsManager.SetTutorialTime(Mathf.Min(winTime, bestTime));
+                break;
+            case 2:
+                bestTime = optionsManager.GetLevelOneTime();
+                optionsManager.SetLevelOneTime(Mathf.Min(winTime, bestTime));
+                break;
+        }
+            
         }
 
     }

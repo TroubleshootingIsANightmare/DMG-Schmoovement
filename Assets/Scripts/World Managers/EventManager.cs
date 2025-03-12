@@ -61,7 +61,7 @@ public class EventManager : MonoBehaviour
         reloaded = true;
         paused = false;
         died = false;
-
+        timerScript.setTime(0);
     }
 
     public void SetPaused(bool pause)

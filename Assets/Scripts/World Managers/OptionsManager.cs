@@ -15,6 +15,7 @@ public class OptionsManager : MonoBehaviour
     public Slider musicVolSlider;
     public GameObject titleCanvas;
     public GameObject tutorialTimeDisplay;
+    public GameObject levelOneTimeDisplay;
 
     private const string LevelOneKey = "LevelOneTime";
     private const string LevelTutorialKey = "LevelTutorialTime";
@@ -44,6 +45,8 @@ public class OptionsManager : MonoBehaviour
         {
             tutorialTimeDisplay = GameObject.FindGameObjectWithTag("Tutorial Time");
             tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelTutorialKey, 9999f));
+            tutorialTimeDisplay = GameObject.FindGameObjectWithTag("Level One Time");
+            tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelOneKey, 9999f));
         }
     }
     void Start()
@@ -55,16 +58,19 @@ public class OptionsManager : MonoBehaviour
         float savedSensY = PlayerPrefs.GetFloat(SensYKey, 200.0f);
         float savedMusicVol = PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
         float savedTutorialTime = PlayerPrefs.GetFloat(LevelTutorialKey, 9999f);
+        float savedLevelOneTime = PlayerPrefs.GetFloat(LevelOneKey, 9999f);
         // Set slider values
         sensXSlider.value = savedSensX;
         sensYSlider.value = savedSensY;
         musicVolSlider.value = savedMusicVol;
         tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedTutorialTime);
+        levelOneTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedLevelOneTime); 
         //Set values at start
         OnMusicVolChanged(savedMusicVol);
         OnSensXChanged(savedSensX);
         OnSensYChanged(savedSensY);
         SetTutorialTime(savedTutorialTime);
+        SetLevelOneTime(savedLevelOneTime);
         // Add listeners to handle slider value changes
         sensXSlider.onValueChanged.AddListener(OnSensXChanged);
         sensYSlider.onValueChanged.AddListener(OnSensYChanged);
@@ -101,6 +107,11 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void SetLevelOneTime(float value)
+    {
+        PlayerPrefs.SetFloat(LevelOneKey, value);
+        PlayerPrefs.Save();
+    }
 
     // Optionally, you can have a method to get the sensitivity values
     public float GetSensX()
@@ -121,6 +132,11 @@ public class OptionsManager : MonoBehaviour
     public float GetTutorialTime()
     {
         return PlayerPrefs.GetFloat(LevelTutorialKey, 9999f);
+    }
+
+    public float GetLevelOneTime()
+    {
+        return PlayerPrefs.GetFloat(LevelOneKey, 9999f);
     }
 
 }

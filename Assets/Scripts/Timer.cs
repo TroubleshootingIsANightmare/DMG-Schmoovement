@@ -28,10 +28,17 @@ using Unity.Services.Leaderboards;
             {
                 i = 0f;
             }
+        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
         }
 
-        // Update is called once per frame
-        void FixedUpdate()
+    private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
+    {
+        setTime(0);
+        throw new NotImplementedException();   
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
         {
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
