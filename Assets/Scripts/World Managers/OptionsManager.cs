@@ -13,6 +13,7 @@ public class OptionsManager : MonoBehaviour
     public Slider sensXSlider;
     public Slider sensYSlider;
     public Slider musicVolSlider;
+    public Slider SFXVolSlider;
     public GameObject titleCanvas;
     public GameObject tutorialTimeDisplay;
     public GameObject levelOneTimeDisplay;
@@ -22,6 +23,7 @@ public class OptionsManager : MonoBehaviour
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
     private const string MusicVolKey = "MusicVol";
+    private const string SFXVolKey = "SFXVol";
 
     public static OptionsManager instance;
 
@@ -57,21 +59,25 @@ public class OptionsManager : MonoBehaviour
         float savedSensX = PlayerPrefs.GetFloat(SensXKey, 200.0f);
         float savedSensY = PlayerPrefs.GetFloat(SensYKey, 200.0f);
         float savedMusicVol = PlayerPrefs.GetFloat(MusicVolKey, 0.5f);
+        float savedSFXVol = PlayerPrefs.GetFloat(SFXVolKey, 0.5f);
         float savedTutorialTime = PlayerPrefs.GetFloat(LevelTutorialKey, 9999f);
         float savedLevelOneTime = PlayerPrefs.GetFloat(LevelOneKey, 9999f);
         // Set slider values
         sensXSlider.value = savedSensX;
         sensYSlider.value = savedSensY;
         musicVolSlider.value = savedMusicVol;
+        SFXVolSlider.value = savedSFXVol;
         tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedTutorialTime);
         levelOneTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedLevelOneTime); 
         //Set values at start
         OnMusicVolChanged(savedMusicVol);
         OnSensXChanged(savedSensX);
         OnSensYChanged(savedSensY);
+        OnSFXVolChanged(savedSFXVol);
         SetTutorialTime(savedTutorialTime);
         SetLevelOneTime(savedLevelOneTime);
         // Add listeners to handle slider value changes
+        SFXVolSlider.onValueChanged.AddListener(OnSFXVolChanged);
         sensXSlider.onValueChanged.AddListener(OnSensXChanged);
         sensYSlider.onValueChanged.AddListener(OnSensYChanged);
         musicVolSlider.onValueChanged.AddListener(OnMusicVolChanged);
@@ -91,6 +97,12 @@ public class OptionsManager : MonoBehaviour
     private void OnMusicVolChanged(float value)
     {
         PlayerPrefs.SetFloat (MusicVolKey, value);
+        PlayerPrefs.Save();
+    }
+
+    private void OnSFXVolChanged(float value)
+    {
+        PlayerPrefs.SetFloat(SFXVolKey, value);
         PlayerPrefs.Save();
     }
 
@@ -117,6 +129,11 @@ public class OptionsManager : MonoBehaviour
     public float GetSensX()
     {
         return PlayerPrefs.GetFloat(SensXKey, 200f);
+    }
+
+    public float GetSFXVol()
+    {
+        return PlayerPrefs.GetFloat(SFXVolKey, 0.5f);
     }
 
     public float GetSensY()

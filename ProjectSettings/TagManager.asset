@@ -12,6 +12,7 @@ TagManager:
   - musicSlider
   - Tutorial Time
   - Level One Time
+  - SFXSlider
   layers:
   - Default
   - TransparentFX

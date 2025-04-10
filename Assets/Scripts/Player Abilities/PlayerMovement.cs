@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
     private CapsuleCollider collider;   
     private float colliderHeight = 2f;
+    public Transform newPos;
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode slideKey = KeyCode.LeftShift;
+    public KeyCode stompKey = KeyCode.LeftAlt;
 
     [Header("Grounded")]
     public LayerMask ground;
@@ -81,12 +83,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Check grounded
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight*0.5f + 0.35f, ground);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.35f, ground);
         SpeedParticles();
 
         //Check for spawn
-        if (SceneManager.GetActiveScene().buildIndex != 0 && !spawned) SetPosition();
-        if (SceneManager.GetActiveScene().buildIndex == 0) spawned = false;
+        if (SceneManager.GetActiveScene().buildIndex != 0 && !spawned) { SetPosition(); }
+        if (SceneManager.GetActiveScene().buildIndex == 0) {spawned = false; }
+
+        if (SceneManager.GetActiveScene().buildIndex > 0 && newPos == null) { newPos = GameObject.Find("Spawn").GetComponent<Transform>(); }
 
     }
 
@@ -150,7 +154,10 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-
+        if(!grounded && Input.GetKeyDown(stompKey))
+        {
+            rb.AddForce(Vector3.down * 50f, ForceMode.Impulse);
+        }
         JumpAndSlideLogic();
     }
 
@@ -272,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
     public void SetPosition()
     {
         spawned = true;
-        Transform newPos = GameObject.Find("Spawn").GetComponent<Transform>();
+        newPos = GameObject.Find("Spawn").GetComponent<Transform>();
         gameObject.transform.position = newPos.position;
         rb.velocity = Vector3.zero;
         cameraManager.ResetRotation();

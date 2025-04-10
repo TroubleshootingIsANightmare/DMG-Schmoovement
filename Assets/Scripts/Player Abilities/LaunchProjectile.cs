@@ -20,6 +20,7 @@ public class LaunchProjectile : MonoBehaviour
     public Transform shootPosition;
     public Transform gunHolder;
 
+    public float bulletsFired = 1f;
     public float bulletSpeed;
     public float shootCooldown;
     float shake = 0f;

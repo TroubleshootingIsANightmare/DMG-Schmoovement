@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
             audioSource.Play();
             Vector3 dir = target.position - shootPoint.position;
             rb.AddForce(dir.normalized * 32f, ForceMode.Impulse);
-            rb.gameObject.transform.localScale = this.gameObject.transform.localScale;
+            rb.gameObject.transform.localScale = this.gameObject.transform.localScale * 20f;
 
             ///End of attack code
 

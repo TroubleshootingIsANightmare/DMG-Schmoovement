@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MusicManager : MonoBehaviour
 {
     private AudioSource audioSource;
+    public AudioSource sfxAudioSource;
     public AudioClip[] songs;
     public OptionsManager options;
     // Start is called before the first frame update
@@ -28,6 +29,8 @@ public class MusicManager : MonoBehaviour
         audioSource.volume = volume;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -36,6 +39,7 @@ public class MusicManager : MonoBehaviour
         if (options != null)
         {
             audioSource.volume = options.GetMusicVol();
+            sfxAudioSource.volume = options.GetSFXVol();
         }
 
     }

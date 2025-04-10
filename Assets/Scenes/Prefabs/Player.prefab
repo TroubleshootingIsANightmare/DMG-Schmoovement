@@ -313,6 +313,7 @@ MonoBehaviour:
   playerHeight: 1.4
   player: {fileID: 5961306543607173762}
   cameraManager: {fileID: 0}
+  newPos: {fileID: 0}
   jumpKey: 32
   slideKey: 304
   ground:
@@ -324,7 +325,7 @@ MonoBehaviour:
   canJump: 0
   sliding: 0
   jumpForce: 600
-  slideForce: 300
+  slideForce: 325
   counterMovement: 0.175
   slideCounterMovement: 3.5
   maxSpeed: 30
@@ -1311,6 +1312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4013877509855684527}
   - component: {fileID: 8721121312213867566}
+  - component: {fileID: 5541921814823039532}
   m_Layer: 7
   m_Name: Rocket Launcher Model
   m_TagString: Untagged
@@ -1356,11 +1358,107 @@ MonoBehaviour:
   camPos: {fileID: 100958297299440528}
   shootPosition: {fileID: 6953713977802533364}
   gunHolder: {fileID: 2518158342242304561}
-  bulletSpeed: 30
+  bulletSpeed: 45
   shootCooldown: 0.5
   shooting: 0
   canShoot: 1
   targetPoint: {x: 0, y: 0, z: 0}
+--- !u!82 &5541921814823039532
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4395505508330568981}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 28d25780ec27de542a2eacc314f65422, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 3dca4820d38b71d43a156af43f6a4dd5, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4458075743083158466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,9 +2058,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 589ce0a3d9caf794fa20b7159ec11c29, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

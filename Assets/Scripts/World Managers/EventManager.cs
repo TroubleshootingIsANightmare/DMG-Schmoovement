@@ -51,7 +51,6 @@ public class EventManager : MonoBehaviour
     {
         SceneManager.LoadScene(i);
         timerScript.setTime(0);
-        died = false;
     }
 
     public void ReloadScene()
@@ -96,6 +95,7 @@ public class EventManager : MonoBehaviour
     private void LateUpdate()
     {
         if (!paused) { pauseMenu.SetActive(false); }
+        if (SceneManager.GetActiveScene().buildIndex == 0) { died = false; }
     }
 
     void TogglePause()
