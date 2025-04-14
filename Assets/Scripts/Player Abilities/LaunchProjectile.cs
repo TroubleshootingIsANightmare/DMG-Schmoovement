@@ -79,7 +79,7 @@ public class LaunchProjectile : MonoBehaviour
         {
             isCharging = true;
             chargeTime += Time.deltaTime;
-            chargeTime = Mathf.Clamp(chargeTime, 0f, 10f); // Prevent overcharging
+            chargeTime = Mathf.Clamp(chargeTime, 0f, 5f); // Prevent overcharging
         } else
         {
             isCharging = false;
