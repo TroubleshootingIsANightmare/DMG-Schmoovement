@@ -8902,6 +8902,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 441315689517206162, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 516388907352319113, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: m_Name
       value: Player
@@ -8910,10 +8914,42 @@ PrefabInstance:
       propertyPath: cameraManager
       value: 
       objectReference: {fileID: 2052498691}
+    - target: {fileID: 2287737377676624901, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663408626987277324, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 2663408626987277324, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: recoil
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663408626987277324, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: shootFX
+      value: 
+      objectReference: {fileID: 4133907773371936855, guid: 65383647d03752c40b6bc64d846c6f11, type: 3}
+    - target: {fileID: 2663408626987277324, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: eventManager
+      value: 
+      objectReference: {fileID: 1202220982}
+    - target: {fileID: 2663408626987277324, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: chargeMultiplier
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032807017524620339, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4630055353354649085, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: cameraManager
       value: 
       objectReference: {fileID: 2052498691}
+    - target: {fileID: 5635706051162032189, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7736366971756708102, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8970,6 +9006,10 @@ PrefabInstance:
       propertyPath: songs.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 4b899c1611b290349a1503fa611d3619, type: 3}
+    - target: {fileID: 8660599833290228549, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8721121312213867566, guid: e8c7e3b1c6965c64dbdf42afec9adeac, type: 3}
       propertyPath: cam
       value: 

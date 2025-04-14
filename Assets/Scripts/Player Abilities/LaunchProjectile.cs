@@ -23,6 +23,9 @@ public class LaunchProjectile : MonoBehaviour
     public float bulletsFired = 1f;
     public float bulletSpeed;
     public float shootCooldown;
+    public float recoil;
+    public float chargeMultiplier = 100f;
+    public float chargeTime;
     float shake = 0f;
     float decreaseFactor = 1f; 
     float shakeAmount = 0.05f;
@@ -31,7 +34,9 @@ public class LaunchProjectile : MonoBehaviour
 
     public bool shooting;
     public bool canShoot;
-
+    public bool useProjectile;
+    public bool chargeable;
+    public bool isCharging;
     public Vector3 targetPoint;
     // Start is called before the first frame update
     void Start()
@@ -44,7 +49,12 @@ public class LaunchProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!eventManager.paused && SceneManager.GetActiveScene().buildIndex != 0) CheckShooting(); ShakeCamera(); shootPosition.gameObject.SetActive(canShoot);
+        if (!eventManager.paused && SceneManager.GetActiveScene().buildIndex != 0) {
+            if (!chargeable) { CheckShooting(); }
+            if (chargeable) { CheckCharge(); }
+            ShakeCamera(); 
+            shootPosition.gameObject.SetActive(canShoot); 
+        }
     }
 
     void CheckShooting()
@@ -62,7 +72,36 @@ public class LaunchProjectile : MonoBehaviour
         }
     }
 
-    void Shoot()
+    void CheckCharge()
+    {
+        Debug.Log("CHARGE RUNS");
+        if (Input.GetMouseButton(0))
+        {
+            isCharging = true;
+            chargeTime += Time.deltaTime;
+            chargeTime = Mathf.Clamp(chargeTime, 0f, 10f); // Prevent overcharging
+        } else
+        {
+            isCharging = false;
+        }
+
+        if (!isCharging && chargeTime > 0f)
+        {
+            ApplyChargeForce();
+            chargeTime -= Time.deltaTime;
+        }
+    }
+
+    void ApplyChargeForce()
+    {
+            float appliedForce = recoil * chargeMultiplier;
+            GetTarget();
+            Vector3 direction = targetPoint - shootPosition.position;
+            Instantiate(shootFX, shootPosition.position, gunHolder.rotation);
+            rb.AddForce(-direction.normalized * appliedForce, ForceMode.VelocityChange);
+        
+    }
+void Shoot()
     {
         GetTarget();
         shake = 0.2f;
