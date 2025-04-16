@@ -14,14 +14,18 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        PlaySong();
-    }
+        PlaySong(0);
+            }
 
-    public void PlaySong(int scene = 0)
+    
+    public void PlaySong(int scene)
     {
-        audioSource.clip = songs[scene];
-        audioSource.Play();
-        Debug.Log(audioSource.clip);
+        if (songs[scene] != audioSource.clip)
+        {
+            audioSource.clip = songs[scene];
+            audioSource.Play();
+            Debug.Log(audioSource.clip);
+        }
     }
 
     public void SetVolume(float volume)
@@ -41,6 +45,7 @@ public class MusicManager : MonoBehaviour
             audioSource.volume = options.GetMusicVol();
             sfxAudioSource.volume = options.GetSFXVol();
         }
+        PlaySong(SceneManager.GetActiveScene().buildIndex);
 
     }
 }

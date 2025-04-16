@@ -13,6 +13,7 @@ TagManager:
   - Tutorial Time
   - Level One Time
   - SFXSlider
+  - Level Two Time
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -72,6 +73,7 @@ public class LaunchProjectile : MonoBehaviour
         }
     }
 
+    
     void CheckCharge()
     {
         Debug.Log("CHARGE RUNS");
@@ -145,7 +147,7 @@ void Shoot()
     {
         if (shake > 0f)
         {
-            camPos.localPosition = new Vector3(-0.7f, 0f, 0f) + Random.insideUnitSphere * shakeAmount;
+            camPos.localPosition = new Vector3(-0.7f, 0f, 0f) + UnityEngine.Random.insideUnitSphere * shakeAmount;
             shake -= Time.deltaTime * decreaseFactor;
         }
         else

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class WeaponManager : MonoBehaviour
 
         SwitchWeapon(currentWeapon); // Set default gun
     }
+
+    
 
     // Update is called once per frame
     void FixedUpdate()
@@ -31,7 +35,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    void SwitchWeapon(int index)
+    public void SwitchWeapon(int index)
     {
         for (int i = 0; i < nrWeapons; i++)
         {

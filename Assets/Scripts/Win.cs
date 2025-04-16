@@ -58,6 +58,10 @@ public class Win : MonoBehaviour
                 bestTime = optionsManager.GetLevelOneTime();
                 optionsManager.SetLevelOneTime(Mathf.Min(winTime, bestTime));
                 break;
+            case 3:
+                bestTime = optionsManager.GetLevelTwoTime();
+                optionsManager.SetLevelTwoTime(Mathf.Min(winTime, bestTime));
+                break;
         }
             
         }

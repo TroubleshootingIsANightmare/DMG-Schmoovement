@@ -11,10 +11,12 @@ namespace LeaderboardCreatorDemo
 
         PlayerMovement playerMovement;
         Grapple grapple;
+        WeaponManager weaponManager;
         private void Start()
         {
             eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
             playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+            weaponManager = FindFirstObjectByType<WeaponManager>();
             grapple = FindFirstObjectByType<Grapple>();
         }
 
@@ -24,6 +26,12 @@ namespace LeaderboardCreatorDemo
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 Destroy(grapple.joint);
+                if (weaponManager.currentWeapon == 1) {
+                    LaunchProjectile projScript = weaponManager.weapons[1].GetComponent<LaunchProjectile>();
+                    projScript.isCharging = false;
+                    projScript.chargeTime = 0;
+                }
+                weaponManager.SwitchWeapon(0);
                 playerMovement.spawned = false;
                 Timer time = eventManager.timer.gameObject.GetComponent<Timer>();
                 time.i = 0f;

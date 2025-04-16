@@ -17,8 +17,10 @@ public class OptionsManager : MonoBehaviour
     public GameObject titleCanvas;
     public GameObject tutorialTimeDisplay;
     public GameObject levelOneTimeDisplay;
+    public GameObject levelTwoTimeDisplay;
 
     private const string LevelOneKey = "LevelOneTime";
+    private const string LevelTwoKey = "LevelTwoTime";
     private const string LevelTutorialKey = "LevelTutorialTime";
     private const string SensXKey = "SensX";
     private const string SensYKey = "SensY";
@@ -47,8 +49,10 @@ public class OptionsManager : MonoBehaviour
         {
             tutorialTimeDisplay = GameObject.FindGameObjectWithTag("Tutorial Time");
             tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelTutorialKey, 9999f));
-            tutorialTimeDisplay = GameObject.FindGameObjectWithTag("Level One Time");
-            tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelOneKey, 9999f));
+            levelOneTimeDisplay = GameObject.FindGameObjectWithTag("Level One Time");
+            levelOneTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelOneKey, 9999f));
+            levelTwoTimeDisplay = GameObject.FindGameObjectWithTag("Level Two Time");
+            levelTwoTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", PlayerPrefs.GetFloat(LevelTwoKey, 9999f));
         }
     }
     void Start()
@@ -62,13 +66,15 @@ public class OptionsManager : MonoBehaviour
         float savedSFXVol = PlayerPrefs.GetFloat(SFXVolKey, 0.5f);
         float savedTutorialTime = PlayerPrefs.GetFloat(LevelTutorialKey, 9999f);
         float savedLevelOneTime = PlayerPrefs.GetFloat(LevelOneKey, 9999f);
+        float savedLevelTwoTime = PlayerPrefs.GetFloat(LevelTwoKey, 9999f);
         // Set slider values
         sensXSlider.value = savedSensX;
         sensYSlider.value = savedSensY;
         musicVolSlider.value = savedMusicVol;
         SFXVolSlider.value = savedSFXVol;
         tutorialTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedTutorialTime);
-        levelOneTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedLevelOneTime); 
+        levelOneTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedLevelOneTime);
+        levelTwoTimeDisplay.GetComponent<TMP_Text>().text = "Best Time: " + String.Format("{0:0.00}", savedLevelTwoTime);
         //Set values at start
         OnMusicVolChanged(savedMusicVol);
         OnSensXChanged(savedSensX);
@@ -76,6 +82,7 @@ public class OptionsManager : MonoBehaviour
         OnSFXVolChanged(savedSFXVol);
         SetTutorialTime(savedTutorialTime);
         SetLevelOneTime(savedLevelOneTime);
+        SetLevelTwoTime(savedLevelTwoTime);
         // Add listeners to handle slider value changes
         SFXVolSlider.onValueChanged.AddListener(OnSFXVolChanged);
         sensXSlider.onValueChanged.AddListener(OnSensXChanged);
@@ -125,6 +132,12 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void SetLevelTwoTime(float value)
+    {
+        PlayerPrefs.SetFloat(LevelTwoKey, value);
+        PlayerPrefs.Save();
+    }
+
     // Optionally, you can have a method to get the sensitivity values
     public float GetSensX()
     {
@@ -156,4 +169,8 @@ public class OptionsManager : MonoBehaviour
         return PlayerPrefs.GetFloat(LevelOneKey, 9999f);
     }
 
+    public float GetLevelTwoTime()
+    {
+        return PlayerPrefs.GetFloat(LevelTwoKey, 9999f);
+    }
 }
